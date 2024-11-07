@@ -14,7 +14,7 @@ import (
 
 type Client struct{ *ssh.Client }
 
-func (c *Client) CopyFrom(file *os.File, remotePath string, permissions string) {
+func (c *Client) CopyTo(file *os.File, remotePath string, permissions string) {
 	var session, _ = c.NewSession()
 	defer session.Close()
 	var w, _ = session.StdinPipe()
@@ -28,7 +28,7 @@ func (c *Client) CopyFrom(file *os.File, remotePath string, permissions string) 
 	}()
 	session.Wait()
 }
-func (c *Client) CopyTo(file *os.File, remotePath string) {
+func (c *Client) CopyFrom(file *os.File, remotePath string) {
 	var session, _ = c.NewSession()
 	defer session.Close()
 	var r, _ = session.StdoutPipe()
